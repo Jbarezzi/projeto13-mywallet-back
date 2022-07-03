@@ -1,11 +1,14 @@
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import dotenv from "dotenv";
-dotenv.config();
 
+dotenv.config();
 const mongoClient = new MongoClient(process.env.MONGO_URI);
 let db;
+
 mongoClient.connect(() => {
     db = mongoClient.db("myWalletDB");
 })
 
-export default db;
+const objectId = ObjectId;
+
+export default { db, objectId };
