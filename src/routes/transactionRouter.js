@@ -1,8 +1,11 @@
 import { Router } from "express";
+import { createTransaction, getUserWallet } from "./../controllers/transactionController.js";
+import validateUserToken from "./../middlewares/validateUserToken";
+import validateTransaction from "../middlewares/schemas/validateTransation.js";
 
 const router = Router();
 
-router.get("/wallet", validateUser, getUserWallet);
-router.post("/wallet/new-transaction", validateUser, createTransaction);
+router.get("/wallet", validateUserToken, getUserWallet);
+router.post("/wallet/new-transaction:type", validateUserToken, validateTransaction, createTransaction);
 
 export default router;
