@@ -1,5 +1,5 @@
 import Joi from "joi";
-import validate from "./../validate.js";
+import validateWithJoi from "../validateWithJoi.js";
 
 export default function validateSignUp(req, res, next) {
     const signUpSchema = Joi.object({
@@ -8,5 +8,5 @@ export default function validateSignUp(req, res, next) {
         password: Joi.string().required(),
     });
 
-    validate(signUpSchema, req.body, res, next);
+    validateWithJoi(signUpSchema, req.body, res, next);
 }

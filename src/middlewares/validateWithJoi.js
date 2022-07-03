@@ -1,4 +1,4 @@
-export default async function validate(schema, target, res, next) {
+export default async function validateWithJoi(schema, target, res, next) {
     try {
         await schema.validateAsync(target, { abortEarly: false });
         next();

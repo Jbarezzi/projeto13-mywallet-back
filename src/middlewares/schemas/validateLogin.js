@@ -1,5 +1,5 @@
 import Joi from "joi";
-import validate from "./../validate.js";
+import validateWithJoi from "../validateWithJoi.js";
 
 export default function validateLogin(req, res, next) {
     const loginSchema = Joi.object({
@@ -7,5 +7,5 @@ export default function validateLogin(req, res, next) {
         password: Joi.string().required(),
     });
 
-    validate(loginSchema, req.body, res, next);
+    validateWithJoi(loginSchema, req.body, res, next);
 }
