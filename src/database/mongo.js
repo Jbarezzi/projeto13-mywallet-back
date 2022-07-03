@@ -11,4 +11,4 @@ mongoClient.connect(() => {
 
 const objectId = ObjectId;
 
-export default { db, objectId };
+export { db, objectId };

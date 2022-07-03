@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-export async function validateSignUp(req, res) {
+export async function validateSignUp(req, res, next) {
     const newUser = req.body;
 
     const signUpSchema = Joi.object({
@@ -13,7 +13,8 @@ export async function validateSignUp(req, res) {
         await signUpSchema.validateAsync(newUser);
         next();
     } catch(error) {
-        res.status(422).send();
+        const errors = error.details.map(detail => detail.message);
+        res.status(422).send(errors);
     }
 }
 

@@ -1,4 +1,4 @@
-import { db } from "./../database/mongo";
+import { db } from "./../database/mongo.js";
 import bcrypt from "bcrypt";
 
 export async function signUp(req, res) {
