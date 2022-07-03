@@ -8,5 +8,8 @@ export async function getUserWallet(req, res) {
 }
 
 export async function createTransaction(req, res) {
-    
+    const userId = req.locals.session;
+    const transaction = req.body;
+    await db.collection("wallet").updateOne({ userId }, { $push: { transactions: transaction } });
+    res.sendStatus(201);
 }

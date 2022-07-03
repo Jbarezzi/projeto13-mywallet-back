@@ -13,7 +13,9 @@ export async function signUp(req, res) {
 
     const saltRounds = 10;
     newUser.password = bcrypt.hashSync(newUser.password, saltRounds);
-    await db.collection("users").insertOne(newUser)
+    const inserted = await db.collection("users").insertOne(newUser)
+    const wallet = { userId: inserted.insertedId, transactions: [] }
+    await db.collection("wallets").insertOne(wallet);
     res.sendStatus(201);
 }
 
