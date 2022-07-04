@@ -4,12 +4,17 @@ export default async function validateUserToken(req, res, next) {
     const { authorization } = req.headers;
 
     const token = authorization?.replace('Bearer ', '');
-    const isTokenValid = await db.collection("sessions").findOne(token);
+    
+    if(!token) {
+        return res.sendStatus(401)
+    }
+    
+    const isTokenValid = await db.collection("sessions").findOne({ token });
 
-    if(isTokenValid) {
-        req.locals.session = isTokenValid.userId;
-        next();
+    if(!isTokenValid) {
+        return res.sendStatus(401);
     }
 
-    res.sendStatus(401);
+    res.locals.session = isTokenValid.userId;
+    next();
 }
